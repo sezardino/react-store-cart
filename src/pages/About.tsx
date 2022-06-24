@@ -1,3 +1,7 @@
 export const About = () => {
-  return <h1>About</h1>;
+  return (
+    <div className="container py-10">
+      <h1 className="text-4xl">About</h1>
+    </div>
+  );
 };

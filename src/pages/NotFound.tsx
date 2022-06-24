@@ -1,3 +1,7 @@
 export const NotFound = () => {
-  return <h1>NotFound</h1>;
+  return (
+    <div className="container py-10">
+      <h1 className="text-4xl">NotFound</h1>
+    </div>
+  );
 };
