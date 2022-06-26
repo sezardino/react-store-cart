@@ -6,14 +6,22 @@ import { Button } from "./Button";
 
 interface Props extends React.HTMLProps<HTMLDivElement> {
   item: StoreItem;
+  quantity: number;
+  addHandler: (id: string) => void;
+  removeHandler: (id: string) => void;
+  deleteHandler: (id: string) => void;
 }
 
 export const StoreCard: React.FC<Props> = (props) => {
-  const { item, className, ...rest } = props;
-  const [quantity, setQuantity] = useState(0);
-
-  const addOne = () => setQuantity((prev) => prev + 1);
-  const delOne = () => setQuantity((prev) => prev - 1);
+  const {
+    item,
+    quantity,
+    className,
+    addHandler,
+    deleteHandler,
+    removeHandler,
+    ...rest
+  } = props;
 
   return (
     <article
@@ -29,16 +37,20 @@ export const StoreCard: React.FC<Props> = (props) => {
           {quantity > 0 ? (
             <div className="flex flex-col gap-5 items-center">
               <div className="flex gap-3 justify-center items-center">
-                <Button onClick={addOne}>+</Button>
+                <Button onClick={() => addHandler(item.id)}>+</Button>
                 <small className="text-lg">{quantity} in cart</small>
-                <Button onClick={delOne}>-</Button>
+                <Button onClick={() => removeHandler(item.id)}>-</Button>
               </div>
-              <Button accent="danger" size="small" onClick={() => setQuantity(0)}>
+              <Button
+                accent="danger"
+                size="small"
+                onClick={() => deleteHandler(item.id)}
+              >
                 Remove
               </Button>
             </div>
           ) : (
-            <Button className="w-full" onClick={addOne}>
+            <Button className="w-full" onClick={() => addHandler(item.id)}>
               Add To Cart
             </Button>
           )}
@@ -47,7 +59,7 @@ export const StoreCard: React.FC<Props> = (props) => {
       <img
         src={item.imgUrl}
         alt={item.name}
-        className="object-cover w-full h-52 -order-1"
+        className="object-cover w-full h-20 -order-1"
       />
     </article>
   );

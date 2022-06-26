@@ -7,6 +7,15 @@ module.exports = {
         center: true,
         padding: "1rem",
       },
+      animation: {
+        offcanvas: "offcanvas 1s ease-in-out both",
+      },
+      keyframes: {
+        offcanvas: {
+          "0%": { opacity: 1 },
+          "100%": { opacity: 0, visibility: "hidden" },
+        },
+      },
     },
   },
   plugins: [],
