@@ -3,8 +3,10 @@ import clsx from "clsx";
 
 import { CartButton } from "./CartButton";
 import { useRef } from "react";
+import { useCartContext } from "../context";
 
 export const Navbar = () => {
+  const { openCart, items, getTotalCount } = useCartContext();
   const location = useLocation();
   const links = useRef([
     {
@@ -36,7 +38,13 @@ export const Navbar = () => {
               {link.name}
             </Link>
           ))}
-          <CartButton count={0} className="ml-auto" />
+          {getTotalCount() > 0 ? (
+            <CartButton
+              count={getTotalCount()}
+              className="ml-auto"
+              onClick={openCart}
+            />
+          ) : null}
         </nav>
       </div>
     </header>
